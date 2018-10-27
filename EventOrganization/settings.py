@@ -38,10 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'MainPage',
-    'OurTeam',
-    'Contacts',
-    'EventCreator',
+    'MainPage.apps.MainpageConfig',
+    'OurTeam.apps.OurteamConfig',
+    'Contacts.apps.ContactsConfig',
+    'EventCreator.apps.EventcreatorConfig',
 ]
 
 MIDDLEWARE = [
