@@ -1,74 +1,49 @@
 from django.db import models
 
 
-class Event(models.Model):
-    id = models.IntegerField(primary_key=True, auto_created=True, unique=True)
-
+class Decoration(models.Model):
     name = models.CharField(max_length=100)
-    description = models.CharField(max_length=200)
+    description = models.TextField()
 
 
 class EventLocation(models.Model):
-    id = models.IntegerField(primary_key=True, auto_created=True, unique=True)
-
     name = models.CharField(max_length=100)
-    description = models.CharField(max_length=200)
+    description = models.TextField()
 
-
-class Event_EventLocation(models.Model):
-    id_Event = models.ForeignKey(to='Event', on_delete=models.CASCADE)
-    id_EventLocation = models.ForeignKey(to='EventLocation', on_delete=models.CASCADE)
+    decoration = models.ManyToManyField(to='Decoration')
 
 
 class ArtistClass(models.Model):
-    id = models.IntegerField(primary_key=True, auto_created=True, unique=True)
-
     name = models.CharField(max_length=100)
-    description = models.CharField(max_length=200)
+    description = models.TextField()
 
 
-class Event_ArtistClass(models.Model):
-    id_Event = models.ForeignKey(to='Event', on_delete=models.CASCADE)
-    id_ArtistClass = models.ForeignKey(to='ArtistClass', on_delete=models.CASCADE)
+class Event(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+
+    event_location = models.ManyToManyField(to="EventLocation")
+    artist_class = models.ManyToManyField(to="ArtistClass")
 
 
 class Artist(models.Model):
-    id = models.IntegerField(primary_key=True, auto_created=True, unique=True)
-    id_ArtistClass = models.ForeignKey(to='ArtistClass', on_delete=models.CASCADE)
+    id_artist_class = models.ForeignKey(to='ArtistClass', on_delete=models.CASCADE)
 
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-
-    description = models.CharField(max_length=200)
-    src_img = models.CharField(max_length=200)
-
-
-class Decoration(models.Model):
-    id = models.IntegerField(primary_key=True, auto_created=True, unique=True)
-
-    name = models.CharField(max_length=100)
-    description = models.CharField(max_length=200)
-
-
-class Decoration_EventLocation(models.Model):
-    id_Decoration = models.ForeignKey(to='Decoration', on_delete=models.CASCADE)
-    id_EventLocation = models.ForeignKey(to='EventLocation', on_delete=models.CASCADE)
+    description = models.TextField()
+    image = models.ImageField(upload_to='images/artist/')
 
 
 class LocationAddress(models.Model):
-    id = models.IntegerField(primary_key=True, auto_created=True, unique=True)
-
     id_location = models.ForeignKey(to='EventLocation', on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
-    description = models.CharField(max_length=200)
-
+    description = models.TextField()
     address = models.CharField(max_length=200)
-    src_img = models.CharField(max_length=200)
+    image = models.ImageField(upload_to='images/location/')
 
 
 class OrderInfo(models.Model):
-    id = models.IntegerField(primary_key=True, auto_created=True, unique=True)
-
     p_first_name = models.CharField(max_length=100)
     p_last_name = models.CharField(max_length=100)
     p_phone = models.CharField(max_length=100)
