@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
-from OurTeam.models import TeamInfo
+from django.http import HttpResponse, HttpRequest
 
 
-
+def show_page(request: HttpRequest):
+    return render(request, 'main_page.html')

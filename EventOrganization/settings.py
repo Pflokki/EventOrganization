@@ -31,6 +31,8 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+    'bootstrap3',
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,8 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'MainPage.apps.MainpageConfig',
-    'OurTeam.apps.OurteamConfig',
-    'Contacts.apps.ContactsConfig',
     'EventCreator.apps.EventcreatorConfig',
 ]
 
@@ -59,7 +59,10 @@ ROOT_URLCONF = 'EventOrganization.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates'),
+            os.path.join(BASE_DIR, 'common/templates')
+        ]
         ,
         'APP_DIRS': True,
         'OPTIONS': {

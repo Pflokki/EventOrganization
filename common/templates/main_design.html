@@ -1,0 +1,56 @@
+{% load bootstrap3 %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div class="jumbotron text-center">
+    <h1>Оформление мероприятий</h1>
+    <p>Медленно! Ужасно! Дорого!</p>
+
+<!-- Navbar -->
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/event-creator">Создать мероприятие</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/#team">Наша команда</a></li>
+        <li><a href="/#feedback">Отзывы</a></li>
+        <li><a href="/#contacts">Контакты</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+</div>
+
+
+
+<div class="content container">
+    <div class="row">
+        <div class="col-md-12">
+            {% block content %}
+            {% endblock content %}
+        </div>
+    </div>
+</div>
+
+
+<!-- Footer -->
+<footer class="container-fluid bg-4 text-center">
+  <p>Константин Уваров 2018-2019г.</p>
+</footer>
+
+
+</body>
+{% bootstrap_css %}
+</html>

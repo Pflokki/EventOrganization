@@ -1,3 +1,7 @@
 from django.shortcuts import render
 
-# Create your views here.
+from django.http import HttpResponse, HttpRequest
+
+
+def show_page(request: HttpRequest):
+    return render(request, 'event_creator.html')

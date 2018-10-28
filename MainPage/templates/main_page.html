@@ -1,0 +1,66 @@
+{% extends 'main_design.html' %}
+{% load bootstrap3 %}
+{% load static %}
+
+{% block content %}
+    <div class="jumbotron text-center">
+        <h3 class="margin"><a name="team"></a>Наша команда</h3>
+        <div class="row">
+            <div class="col-sm-4">
+                <img src="{% static "1.jpeg" %}" class="img-responsive img-circle margin"
+                     style="display:inline" alt="avatar1" width="350" height="350">
+                <h4>Организатор встреч</h4>
+            </div>
+            <div class="col-sm-4">
+                <img src="{% static "1.jpeg" %}" class="img-responsive img-circle margin"
+                     style="display:inline" alt="avatar1" width="350" height="350">
+                <h4>Мега мозг</h4>
+            </div>
+            <div class="col-sm-4">
+                <img src="{% static "1.jpeg" %}" class="img-responsive img-circle margin"
+                     style="display:inline" alt="avatar1" width="350" height="350">
+                <h4>Связь с клиентами</h4>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="jumbotron text-center">
+        <h3 class="margin"><a name="feedback"></a>Отзывы о нашей работе</h3>
+        <iframe src="//coub.com/embed/wz58m?muted=false&autostart=false&originalSize=false&startWithHD=false"
+                allowfullscreen frameborder="0" width="640" height="360"></iframe>
+    </div>
+
+    <div class="jumbotron text-center">
+        <div class="container-fluid bg-3 text-center">
+            <h3 class="margin"><a name="contacts"></a>Как с нами связаться</h3><br>
+            <p>Можно встретиться лично</p>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2381.8949484175096!2d83.78011461548272!3d53.345136679978765!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x42dda44dcb0209a7%3A0x5a406369f8800ce9!2z0JDQu9GC0LDQudGB0LrQuNC5INCf0L7Qu9C40YLQtdGF0L3QuNGH0LXRgdC60LjQuSDQmNC90YHRgtC40YLRg9GC!5e0!3m2!1sru!2sru!4v1540718102901"
+                    width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+
+            <p>Или связаться в социальных сетях</p>
+            <div class="row">
+                <div class="col-sm-4">
+                    <img src="{% static "1.jpeg" %}" class="img-responsive img-circle margin"
+                         style="display:inline" alt="avatar1" width="350" height="350">
+                    <h4>Мы в VK</h4>
+                </div>
+                <div class="col-sm-4">
+                    <img src="{% static "1.jpeg" %}" class="img-responsive img-circle margin"
+                         style="display:inline" alt="avatar1" width="350" height="350">
+                    <h4>Мы в FB</h4>
+
+                </div>
+                <div class="col-sm-4">
+                    <img src="{% static "1.jpeg" %}" class="img-responsive img-circle margin"
+                         style="display:inline" alt="avatar1" width="350" height="350">
+                    <h4>Мы в Twitter</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+
+
