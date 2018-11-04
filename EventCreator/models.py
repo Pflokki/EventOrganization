@@ -4,6 +4,21 @@ from django.db import models
 class Decoration(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
+    price = models.PositiveIntegerField(default=1000)
+    image = models.ImageField(upload_to='images/decorations/', null=True)
+
+    @classmethod
+    def get_list(cls) -> list:
+        _list = []
+        for obj in cls.objects.all():
+            _list.append({
+                'id': f"{obj.id}",
+                'name': obj.name,
+                'price': str(obj.price),
+                'img': obj.image,
+                'description': obj.description
+            })
+        return _list
 
 
 class EventLocation(models.Model):
@@ -12,10 +27,36 @@ class EventLocation(models.Model):
 
     decoration = models.ManyToManyField(to='Decoration')
 
+    @classmethod
+    def get_list(cls) -> list:
+        _list = []
+        for obj in cls.objects.all():
+            _list.append({
+                'id': f"{obj.id}",
+                'name': obj.name,
+                'price': "",
+                'img': "",
+                'description': obj.description
+            })
+        return _list
+
 
 class ArtistClass(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
+
+    @classmethod
+    def get_list(cls) -> list:
+        _list = []
+        for obj in cls.objects.all():
+            _list.append({
+                'id': f"{obj.id}",
+                'name': obj.name,
+                'price': "",
+                'img': "",
+                'description': obj.description
+            })
+        return _list
 
 
 class Event(models.Model):
@@ -25,6 +66,19 @@ class Event(models.Model):
     event_location = models.ManyToManyField(to="EventLocation")
     artist_class = models.ManyToManyField(to="ArtistClass")
 
+    @classmethod
+    def get_list(cls) -> list:
+        _list = []
+        for event in cls.objects.all():
+            _list.append({
+                'id': f"{event.id}",
+                'name': event.name,
+                'price': "",
+                'img': "",
+                'description': event.description
+            })
+        return _list
+
 
 class Artist(models.Model):
     id_artist_class = models.ForeignKey(to='ArtistClass', on_delete=models.CASCADE)
@@ -32,7 +86,25 @@ class Artist(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     description = models.TextField()
-    image = models.ImageField(upload_to='images/artist/')
+    price = models.PositiveIntegerField(default=1000)
+    image = models.ImageField(upload_to='images/artist/', null=True)
+
+    @property
+    def name(self):
+        return f"{self.first_name} {self.last_name}"
+
+    @classmethod
+    def get_list(cls) -> list:
+        _list = []
+        for obj in cls.objects.all():
+            _list.append({
+                'id': f"{obj.id}",
+                'name': obj.name,
+                'price': str(obj.price),
+                'img': obj.image,
+                'description': obj.description
+            })
+        return _list
 
 
 class LocationAddress(models.Model):
@@ -40,7 +112,21 @@ class LocationAddress(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
     address = models.CharField(max_length=200)
-    image = models.ImageField(upload_to='images/location/')
+    price = models.PositiveIntegerField(default=1000)
+    image = models.ImageField(upload_to='images/location/', null=True)
+
+    @classmethod
+    def get_list(cls) -> list:
+        _list = []
+        for obj in cls.objects.all():
+            _list.append({
+                'id': f"{obj.id}",
+                'name': obj.name,
+                'price': str(obj.price),
+                'img': obj.image,
+                'description': f"{obj.address}{obj.description}"
+            })
+        return _list
 
 
 class OrderInfo(models.Model):

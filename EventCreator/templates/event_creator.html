@@ -2,20 +2,55 @@
 {% load static %}
 
 {% block content %}
-<div class="jumbotron text-center">
-    <div class="row col-sm-3">
-        <div class="box">
-            <li>asdq</li>
-        </div>
+    <div>
+        <h2>{{ page_title }}</h2>
     </div>
 
-    <div class="row col-sm-9">
-        <div class="box">
-            <h1>Hello</h1>
+    <form method="post" action=event-creator>{% csrf_token %}
+        <div class="jumbotron text-center">
+            <div class="row">
+                <div class="col-sm-3">
+                    {% for item in items %}
+                        <div class="radio">
+                            <label><input type="radio" name="r-item" class="rg" id="{{ item.id }}" value="{{ item.id }}">
+                                <b> {{ item.name }}</b> <i>{{ item.price }}</i>
+                            </label>
+                        </div>
+                    {% endfor %}
+                </div>
+
+
+                <div class="col-sm-9">
+                    <img src="{% load static %}" class="img-responsive img-circle margin" id="item-img" hidden
+                         style="display:inline" alt="" width="350" height="350">
+                    <div class="text">
+                        <p id="item-description">Chose item</p>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-<div>
+
+        <div class="col-sm-offset-11">
+            <button type="submit" id="btn-next" class="btn btn-success" disabled>Далее</button>
+        </div>
+    </form>
+
 {% endblock content %}
 
+
+{% block import %}
+    <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
+    <script>
+        $(".rg").change(function () {
+            {% for item in items %}
+                if ($("#{{ item.id }}").attr("checked")) {
+                    $("#item-img").attr("src", "{{ item.img.url }}");
+                    $("#item-description").text("{{ item.description }}");
+                    $("#btn-next").removeAttr('disabled');
+                };
+            {% endfor %}
+        });
+    </script>
+{% endblock import %}
 
 
