@@ -20,6 +20,9 @@ class Decoration(models.Model):
             })
         return _list
 
+    def __str__(self):
+        return self.name
+
 
 class EventLocation(models.Model):
     name = models.CharField(max_length=100)
@@ -40,6 +43,9 @@ class EventLocation(models.Model):
             })
         return _list
 
+    def __str__(self):
+        return self.name
+
 
 class ArtistClass(models.Model):
     name = models.CharField(max_length=100)
@@ -57,6 +63,9 @@ class ArtistClass(models.Model):
                 'description': obj.description
             })
         return _list
+
+    def __str__(self):
+        return self.name
 
 
 class Event(models.Model):
@@ -78,6 +87,9 @@ class Event(models.Model):
                 'description': event.description
             })
         return _list
+
+    def __str__(self):
+        return self.name
 
 
 class Artist(models.Model):
@@ -106,6 +118,9 @@ class Artist(models.Model):
             })
         return _list
 
+    def __str__(self):
+        return self.name
+
 
 class LocationAddress(models.Model):
     id_location = models.ForeignKey(to='EventLocation', on_delete=models.CASCADE)
@@ -127,6 +142,9 @@ class LocationAddress(models.Model):
                 'description': f"{obj.address}{obj.description}"
             })
         return _list
+
+    def __str__(self):
+        return self.name
 
 
 class OrderInfo(models.Model):
