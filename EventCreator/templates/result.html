@@ -1,0 +1,69 @@
+{% extends 'main_design.html' %}
+{% load static %}
+{% load bootstrap %}
+
+
+{% block content %}
+    <div>
+        <h2>{{ page_title }}</h2>
+    </div>
+
+    <div class="jumbotron text-center">
+        <p>Создание мероприятия завершено, проверьте Ваш заказ и укажите личные данные,
+            по которым мы сможем связаться с Вами</p>
+    </div>
+
+    <div class="jumbotron text-left">
+        <div class="row">
+            <p>Ваш заказ:</p>
+            {% for item in items %}
+                <div class="col-sm-12">
+                    <p class="col-sm-3">{{ item.header }}</p>
+                    <p class="col-sm-3">{{ item.desc }}</p>
+                    <p class="col-sm-6">{{ item.price }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="jumbotron text-left">
+        <div class="row">
+            <p>Введите данные, по которым мы сможем вязаться с Вами</p>
+            <form method="post" action=event-created>{% csrf_token %}
+                <div class="col-sm-5">
+                        {{ form|bootstrap }}
+{#                        {% for field in form %}#}
+{#                            <div class="col-sm-12">#}
+{#                                <p class="col-sm-3">#}
+{#                                    {{ field.label }}#}
+{#                                </p>#}
+{#                                <p class="col-sm-4">#}
+{#                                    {{ field }}#}
+{#                                </p>#}
+{#                                <p>#}
+{#                                    {{ field.errors }}#}
+{#                                </p>#}
+{#                            </div>#}
+{#                        {% endfor %}#}
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <button type="submit" id="btn-next" class="btn btn-success" value="success">Оформить заказ</button>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+{% endblock content %}
+
+{% block import %}
+    <script>
+  $(function () {
+    // идентификатор элемента (например: #datetimepicker1), для которого необходимо инициализировать виджет Bootstrap DateTimePicker
+    $('#datetimepicker1').datetimepicker();
+  });
+</script>
+{% endblock import %}

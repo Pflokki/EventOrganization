@@ -32,7 +32,10 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 INSTALLED_APPS = [
     'bootstrap3',
-    
+    'bootstrap_datepicker_plus',
+    'bootstrapform',
+    'fontawesome',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,6 +46,10 @@ INSTALLED_APPS = [
     'MainPage.apps.MainpageConfig',
     'EventCreator.apps.EventcreatorConfig',
 ]
+
+BOOTSTRAP3 = {
+    'include_jquery': True,
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -126,6 +133,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

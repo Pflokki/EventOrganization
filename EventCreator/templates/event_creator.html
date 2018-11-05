@@ -7,7 +7,7 @@
     </div>
 
     <form method="post" action=event-creator>{% csrf_token %}
-        <div class="jumbotron text-center">
+        <div class="jumbotron text-left">
             <div class="row">
                 <div class="col-sm-3">
                     {% for item in items %}
@@ -21,10 +21,11 @@
 
 
                 <div class="col-sm-9">
-                    <img src="{% load static %}" class="img-responsive img-circle margin" id="item-img" hidden
+                    <img src="{% load static %}" class="img-responsive img-circle margin text-center" id="item-img" hidden
                          style="display:inline" alt="" width="350" height="350">
                     <div class="text">
                         <p id="item-description">Chose item</p>
+                        <p id="item-address"></p>
                     </div>
                 </div>
             </div>
@@ -46,6 +47,7 @@
                 if ($("#{{ item.id }}").attr("checked")) {
                     $("#item-img").attr("src", "{{ item.img.url }}");
                     $("#item-description").text("{{ item.description }}");
+                    $("#item-address").text("{{ item.address }}");
                     $("#btn-next").removeAttr('disabled');
                 };
             {% endfor %}
