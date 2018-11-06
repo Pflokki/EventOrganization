@@ -6,7 +6,7 @@
         <h2>{{ page_title }}</h2>
     </div>
 
-    <form method="post" action=event-creator>{% csrf_token %}
+    <form method="post" action={{ next_page_url }}>{% csrf_token %}
         <div class="jumbotron text-left">
             <div class="row">
                 <div class="col-sm-3">
@@ -24,7 +24,7 @@
                     <img src="{% load static %}" class="img-responsive img-circle margin text-center" id="item-img" hidden
                          style="display:inline" alt="" width="350" height="350">
                     <div class="text">
-                        <p id="item-description">Chose item</p>
+                        <p id="item-description">{{ description }}</p>
                         <p id="item-address"></p>
                     </div>
                 </div>
@@ -32,7 +32,11 @@
         </div>
 
         <div class="col-sm-offset-11">
-            <button type="submit" id="btn-next" class="btn btn-success" disabled>Далее</button>
+            <button type="submit" id="btn-next" class="btn btn-success"
+                    {% if next_button_enable == false %}
+                        disabled
+                    {% endif %}
+            >Далее</button>
         </div>
     </form>
 

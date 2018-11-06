@@ -32,9 +32,7 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 INSTALLED_APPS = [
     'bootstrap3',
-    'bootstrap_datepicker_plus',
     'bootstrapform',
-    'fontawesome',
 
     'django.contrib.admin',
     'django.contrib.auth',

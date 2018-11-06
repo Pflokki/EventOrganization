@@ -10,7 +10,11 @@ class Decoration(models.Model):
     @classmethod
     def get_first(cls, _id):
         f_r = cls.objects.filter(id=_id).first()
-        return {'desc': f_r.name, 'price': f_r.price}
+        if f_r is not None:
+            return {'desc': f_r.name, 'price': f_r.price}
+        else:
+            return {'desc': "-", 'price': "-"}
+
 
     @classmethod
     def get_list(cls, event_location_id) -> list:
@@ -39,7 +43,10 @@ class EventLocation(models.Model):
     @classmethod
     def get_first(cls, _id):
         f_r = cls.objects.filter(id=_id).first()
-        return {'desc': f_r.name, 'price': ""}
+        if f_r is not None:
+            return {'desc': f_r.name, 'price': "-"}
+        else:
+            return {'desc': "-", 'price': "-"}
 
     @classmethod
     def get_list(cls, event_id) -> list:
@@ -66,7 +73,10 @@ class ArtistClass(models.Model):
     @classmethod
     def get_first(cls, _id):
         f_r = cls.objects.filter(id=_id).first()
-        return {'desc': f_r.name, 'price': ""}
+        if f_r is not None:
+            return {'desc': f_r.name, 'price': "-"}
+        else:
+            return {'desc': "-", 'price': "-"}
 
     @classmethod
     def get_list(cls, event_id) -> list:
@@ -96,7 +106,10 @@ class Event(models.Model):
     @classmethod
     def get_first(cls, _id):
         f_r = cls.objects.filter(id=_id).first()
-        return {'desc': f_r.name, 'price': ""}
+        if f_r is not None:
+            return {'desc': f_r.name, 'price': "-"}
+        else:
+            return {'desc': "-", 'price': "-"}
 
     @classmethod
     def get_list(cls) -> list:
@@ -132,7 +145,10 @@ class Artist(models.Model):
     @classmethod
     def get_first(cls, _id):
         f_r = cls.objects.filter(id=_id).first()
-        return {'desc': f_r.name, 'price': f_r.price}
+        if f_r is not None:
+            return {'desc': f_r.name, 'price': f_r.price}
+        else:
+            return {'desc': "-", 'price': "-"}
 
     @classmethod
     def get_list(cls, id_artist_class) -> list:
@@ -163,7 +179,10 @@ class LocationAddress(models.Model):
     @classmethod
     def get_first(cls, _id):
         f_r = cls.objects.filter(id=_id).first()
-        return {'desc': f_r.name, 'price': f_r.price}
+        if f_r is not None:
+            return {'desc': f_r.name, 'price': f_r.price}
+        else:
+            return {'desc': "-", 'price': "-"}
 
     @classmethod
     def get_list(cls, id_location) -> list:
