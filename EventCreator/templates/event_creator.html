@@ -33,9 +33,7 @@
 
         <div class="col-sm-offset-11">
             <button type="submit" id="btn-next" class="btn btn-success"
-                    {% if next_button_enable == false %}
-                        disabled
-                    {% endif %}
+                    {{ next_button_enable  }}
             >Далее</button>
         </div>
     </form>

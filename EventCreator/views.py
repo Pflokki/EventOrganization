@@ -53,7 +53,7 @@ def show_creator(request: HttpRequest, page_name: str) -> HttpResponse:
             context = {
                 'page_title': content_title,
                 'items': items,
-                'next_button_enable': len(items) == 0,
+                'next_button_enable': "disabled" if len(items) != 0 else "",
                 'description': "Выберите один из вариантов" \
                     if len(items) != 0 else "В заявленной категории нечего выбрать",
                 'next_page_url': s_field_list[page_index + 1] if page_index + 2 != len(s_field_list) else 'result'

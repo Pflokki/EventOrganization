@@ -1,11 +1,16 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 class Decoration(models.Model):
-    name = models.CharField(max_length=100)
-    description = models.TextField()
-    price = models.PositiveIntegerField(default=1000)
-    image = models.ImageField(upload_to='images/decorations/', null=True)
+    class Meta:
+        verbose_name = _('Украшение')
+        verbose_name_plural = _('Украшения')
+
+    name = models.CharField(max_length=100, verbose_name="Название")
+    description = models.TextField( verbose_name="Описание")
+    price = models.PositiveIntegerField(default=1000, verbose_name="Цена")
+    image = models.ImageField(upload_to='images/decorations/', null=True, verbose_name="Изображение")
 
     @classmethod
     def get_first(cls, _id):
@@ -14,7 +19,6 @@ class Decoration(models.Model):
             return {'desc': f_r.name, 'price': f_r.price}
         else:
             return {'desc': "-", 'price': "-"}
-
 
     @classmethod
     def get_list(cls, event_location_id) -> list:
@@ -35,10 +39,14 @@ class Decoration(models.Model):
 
 
 class EventLocation(models.Model):
-    name = models.CharField(max_length=100)
-    description = models.TextField()
+    class Meta:
+        verbose_name = _('Место проведения')
+        verbose_name_plural = _('Места проведения')
 
-    decoration = models.ManyToManyField(to='Decoration')
+    name = models.CharField(max_length=100, verbose_name="Название")
+    description = models.TextField(verbose_name="Описание")
+
+    decoration = models.ManyToManyField(to='Decoration', verbose_name="Украшение")
 
     @classmethod
     def get_first(cls, _id):
@@ -67,8 +75,12 @@ class EventLocation(models.Model):
 
 
 class ArtistClass(models.Model):
-    name = models.CharField(max_length=100)
-    description = models.TextField()
+    class Meta:
+        verbose_name = _('Тип артиста')
+        verbose_name_plural = _('Тип артистов')
+
+    name = models.CharField(max_length=100, verbose_name="Название")
+    description = models.TextField( verbose_name="Описание")
 
     @classmethod
     def get_first(cls, _id):
@@ -97,11 +109,15 @@ class ArtistClass(models.Model):
 
 
 class Event(models.Model):
-    name = models.CharField(max_length=100)
-    description = models.TextField()
+    class Meta:
+        verbose_name = _('Событие')
+        verbose_name_plural = _('События')
 
-    event_location = models.ManyToManyField(to="EventLocation")
-    artist_class = models.ManyToManyField(to="ArtistClass")
+    name = models.CharField(max_length=100, verbose_name="Название")
+    description = models.TextField(verbose_name="Описание")
+
+    event_location = models.ManyToManyField(to="EventLocation", verbose_name="Место проведения")
+    artist_class = models.ManyToManyField(to="ArtistClass", verbose_name="Тип артиста")
 
     @classmethod
     def get_first(cls, _id):
@@ -130,13 +146,17 @@ class Event(models.Model):
 
 
 class Artist(models.Model):
-    id_artist_class = models.ForeignKey(to='ArtistClass', on_delete=models.CASCADE)
+    class Meta:
+        verbose_name = _('Артист')
+        verbose_name_plural = _('Артисты')
 
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    description = models.TextField()
-    price = models.PositiveIntegerField(default=1000)
-    image = models.ImageField(upload_to='images/artist/', null=True)
+    id_artist_class = models.ForeignKey(to='ArtistClass', on_delete=models.CASCADE, verbose_name="Тип артиста")
+
+    first_name = models.CharField(max_length=100, verbose_name="Имя")
+    last_name = models.CharField(max_length=100, verbose_name="Фамилия")
+    description = models.TextField( verbose_name="Описание")
+    price = models.PositiveIntegerField(default=1000, verbose_name="Стоимость")
+    image = models.ImageField(upload_to='images/artist/', null=True, verbose_name="Изображение")
 
     @property
     def name(self):
@@ -169,12 +189,16 @@ class Artist(models.Model):
 
 
 class LocationAddress(models.Model):
-    id_location = models.ForeignKey(to='EventLocation', on_delete=models.CASCADE)
-    name = models.CharField(max_length=100)
-    description = models.TextField()
-    address = models.CharField(max_length=200)
-    price = models.PositiveIntegerField(default=1000)
-    image = models.ImageField(upload_to='images/location/', null=True)
+    class Meta:
+        verbose_name = _('Адрес')
+        verbose_name_plural = _('Адреса')
+
+    id_location = models.ForeignKey(to='EventLocation', on_delete=models.CASCADE, verbose_name="Номер")
+    name = models.CharField(max_length=100, verbose_name="Название")
+    description = models.TextField( verbose_name="Описание")
+    address = models.CharField(max_length=200, verbose_name="Арес")
+    price = models.PositiveIntegerField(default=1000, verbose_name="Стоимость")
+    image = models.ImageField(upload_to='images/location/', null=True, verbose_name="Изображение")
 
     @classmethod
     def get_first(cls, _id):
@@ -203,16 +227,21 @@ class LocationAddress(models.Model):
 
 
 class OrderInfo(models.Model):
-    p_first_name = models.CharField(max_length=100)
-    p_last_name = models.CharField(max_length=100)
-    p_phone = models.CharField(max_length=100)
-    p_email = models.EmailField(max_length=100)
-    event_time = models.DateField(max_length=100)
+    class Meta:
+        verbose_name = _('Информация о заказе')
+        verbose_name_plural = _('Информация о заказах')
+        ordering = ['-event_time']
 
-    id_event = models.ForeignKey(to='Event', on_delete=models.CASCADE)
-    id_location_address = models.ForeignKey(to='LocationAddress', on_delete=models.CASCADE)
-    id_decoration = models.ForeignKey(to='Decoration', on_delete=models.CASCADE)
-    id_artist = models.ForeignKey(to='Artist', on_delete=models.CASCADE)
+    p_first_name = models.CharField(max_length=100, verbose_name="Имя")
+    p_last_name = models.CharField(max_length=100, verbose_name="Фамилия")
+    p_phone = models.CharField(max_length=100, verbose_name="Телефон")
+    p_email = models.EmailField(max_length=100, verbose_name="Мыло")
+    event_time = models.DateField(max_length=100, verbose_name="Дата")
+
+    id_event = models.ForeignKey(to='Event', on_delete=models.CASCADE, verbose_name="СОбытие")
+    id_location_address = models.ForeignKey(to='LocationAddress', on_delete=models.CASCADE, verbose_name="Адрес")
+    id_decoration = models.ForeignKey(to='Decoration', on_delete=models.CASCADE, verbose_name="Украшение")
+    id_artist = models.ForeignKey(to='Artist', on_delete=models.CASCADE, verbose_name="Артист")
 
     @classmethod
     def save_record(cls, **kwargs):
@@ -230,3 +259,6 @@ class OrderInfo(models.Model):
 
         oi.save()
 
+    def __str__(self):
+        return f"Имя: {self.p_first_name}, Фамилия: {self.p_last_name}, " \
+               f"Дата: {self.event_time}, Телефон: {self.p_phone}"
