@@ -230,7 +230,7 @@ class OrderInfo(models.Model):
     class Meta:
         verbose_name = _('Информация о заказе')
         verbose_name_plural = _('Информация о заказах')
-        ordering = ['-event_time']
+        ordering = ['event_time']
 
     p_first_name = models.CharField(max_length=100, verbose_name="Имя")
     p_last_name = models.CharField(max_length=100, verbose_name="Фамилия")
@@ -262,3 +262,11 @@ class OrderInfo(models.Model):
     def __str__(self):
         return f"Имя: {self.p_first_name}, Фамилия: {self.p_last_name}, " \
                f"Дата: {self.event_time}, Телефон: {self.p_phone}"
+
+    @classmethod
+    def get_list_excluded_dates(self) -> list:
+        _list = []
+        for obj in self.objects.values():
+            _list.append(obj['event_time'].strftime("%Y-%m-%d"))
+
+        return _list

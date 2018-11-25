@@ -103,7 +103,7 @@ def show_personal_info(request: HttpRequest) -> HttpResponse:
         raise Http404
 
     result_context['form'] = form
-    result_context['excluded_date'] = ['2018-11-6', '2018-11-7', '2018-11-8']
+    result_context['excluded_date'] = OrderInfo.get_list_excluded_dates() # ['2018-11-29', '2018-11-30']
     return render(request, 'result.html', context=result_context)
 
 
